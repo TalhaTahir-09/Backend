@@ -76,7 +76,7 @@ app.post("/signup", (req, res) => {
     } else {
       let user = { username: req.body.username, password: hash };
       const accessToken = generateAccessToken(user);
-      const refreshToken = jwt.sign(user, process.env.SECRET_REFRESH_TOKEN_KEY);
+      const refreshToken = jwt.sign(user, process.env.SECRET_REFRESH_TOKEN_KEY, {expiresIn: "20s"});
       users.push(user);
       refreshTokens.push({ refreshToken });
       let pushedData = JSON.stringify({
